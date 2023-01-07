@@ -1,0 +1,7 @@
+//reconocer los presets
+{
+    "preset":[
+        "@babel/preset-env",  //Compila JS 
+        "@babel/preset-react"  //Compila React
+    ]
+}
