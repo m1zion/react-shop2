@@ -6,9 +6,11 @@ module.exports = {
         path:path.resolve(__dirname,'dist'),
         filename: 'bundle.js'
     },
+    mode: 'development',
     resolve:{  //Extensiones admintidas
         extensions: ['.js','.jsx']
     },
+    
     module:{  //reglas loaders y plugins
         rules: [
             {
@@ -22,7 +24,7 @@ module.exports = {
                 test: /\.html$/,
                 use: [  //Le decimos que lo use con el loader que instalamos
                     {
-                        laoder:'html-loader'
+                        loader:'html-loader',
                     }
                 ]
             }
