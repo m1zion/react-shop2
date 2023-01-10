@@ -1,0 +1,252 @@
+git reset --hard HEAD
+git pull
+
+AppContext.jsx
+1. Creamos el contexto que va a usar la API y lo exportamos para poder ser usado
+
+App.jsx
+2. Conectar context a la aplicacion en 
+import AppContext from '@context/AppContext';
+
+3. Trabajar con el provider para compartir esa informacion, sobre el return
+<AppContext.Provider value={initialState}>
+</AppContext.Provider> 
+
+useInitialState.js
+4. Creamos un custom Hook que va a agregar los items al carrito, este lo vamos a importatar en productItem y en App.jsx
+
+productItem.jsx
+5. Conectar este elemento. Usamos el usecontext
+    const {addToCart} = useContext(AppContext); //Llamamos el estado
+
+
+CLASE 3 Inicializar el repositario *******************************************
+npm init
+  nombre: reactshop
+  entry point: src/index.js
+  keywords: React Javascript
+  aunthor: MLD <misaelzion@gmail.com>
+  License: MIT
+
+npm install react react-dom
+Creamos el archivo 
+src/index.js
+src/components/App.jsx
+
+CLASE 4 BABBEL y WEBPACK ****************************************************
+BABEL: Javascript y react
+WEBPACK (curso de webpack)
+npm install @babel/core @babel/preset-env @babel/preset-react
+npm install webpack webpack-cli webpack dev-server
+npm install babel-loader html-loader html-webpack-plugin
+
+Configuramos 
+.babelrc
+webpack.config,js ( indicamos todos los plugins y configuraciones)
+pasamos el parametro de productlist a productItem
+
+CLASE 5 Instalar SASS ***************************************
+npm install mini-css-extract-plugin css-loader style-loader sass -D
+npm install sass-loader -D
+
+En webpack config agregamos las siguientes configuraciones:
+ -En loader: new MiniCSSExtractPlugin
+ -En  devServer: historyApiFallback: true,
+ -En rules: test: /\.(css|scss)$/i,
+ -Declaramos la constante del plugin const MiniCSSExtractPlugin 
+
+CLASE 17 UseState *******************************************
+En productItem.js y asi podemos usar cart donde queramos Recordemos que los estados son maneras 
+en la que un componente puede administrar información cambiante en el entorno, y después de ser 
+llamado se renderiza el React DOM de nuevo
+  1. Importamos en useState
+    import React, {useState} from 'react';
+  2. Pasamos un valor y una funcion modificadora
+    const [cart,setCart] = useState([]); 
+    const handleClickEffect = () => {
+      setCart(['hey']);
+    }
+  3. Agregamos la funcion en un elemento
+    <p onClick={() => handleClickEffect(product)}>${product.price}</p>
+  4. Ahora ponemos usar la variable en cualquier parte
+    {cart}
+*************************************************** CLASE 17
+
+CLASE 18 Toggle Menu (useState)*******************************************
+  1. Importamos en useState en Header.jsx
+    import React, {useState} from 'react';
+  2. Pasamos un valor y una funcion modificadora 
+    const [toggle,setToggle] = useState(false); //no se mostrara
+    const handleToggle = () => {
+      setToggle(!toggle);
+    }
+  3. Agregamos la funcion en un elemento navbar-email
+   <li className="navbar-email" onClick= {handleToggle}>email@example.com</li>
+  4. Importamos nuestro menu
+    import Menu from '@components/Menu';
+  5. Lo colocamos en el HTML con la condicion de toggle
+    {toggle ? <Menu/> : ""}
+*************************************************** CLASE 18 
+
+CLASE 19 useEffect y consumo de APIs *************************
+  useState solo cambia el estado de los elementos
+  Use Effect ayuda a hacer peticiones y renderisar los elementos de la API
+  1. En productlist.jsx creamos nuestra constante 
+    const API = 'https://apidev.solucionesparatuauto.mx/api/v1/products/?offset=1&limit=10';
+  1.1. Instalamos babel plugin transform runtime
+  2. Importamos axios, useEffect y useState, y lo agregamos a .babelerc
+    import { useEffect,useState} from 'react';
+    import axios from'axios';
+  3. Llamamos la informacion dentro de productList con useState, 
+     y luego consumimos el API con useEffect (funcion anonima, arreglo elementos)
+      const [productsUE, setProducts] = useState([]);
+      useEffect(async()=> {
+          const response = await axios(APIP);
+          setProducts(response.data);
+      }, []) 
+      En el curso de reactHooks usamos el .then 
+
+      useEffect(() => {
+      fetch('https://rickandmortyapi.com/api/character/')
+        .then(response => response.json())
+        .then(data => setCharacters(data.results));
+    }, []);
+
+  4. Hacemos la logica para iterar los elementos
+      <div className="ProductList">
+      {
+        productsUE.map(product => (<ProductItem/>))
+      }
+      </div>
+*************************************************** CLASE 19 
+CLASE 20 Custom hooks **************************************
+  1. Separamos la logica en hooks/useGetProducts.js, todos deben empezar con use,
+    lo agregamos a una constante y lo retornamos
+  2. Importamos nuestro hook
+    import useGetProducts from '@hooks/useGetProducts';
+  3. Lo utilizamos en productList dentro de la funcion
+    const products = useGetProducts(API);
+  4. Ahora podemos pasar la informacion de los elementos
+     <ProductItem  product={product}  key={product.id}/>
+  5. En productItem.jsx recibimos ese parametro y ahora podemos hacer render de la informacion
+    const ProductItem = ({product}) => {
+*************************************************** CLASE 20
+CLASE 21 useRef y formularios *******************************
+  useRef es un hook utilizado para obtener una referencia a los datos de un objeto con información mutable. 
+  Es decir, es como una manera de siempre poder obtener los datos mas recientes mediante referencia de 
+  algún objeto de html. En este caso referenciamos a los valores recientes de un formulario
+  1. Importar useRef en Login.jsx
+    import React, { useRef } from 'react';
+  2. Creamos una constante y añadimos la referencia al elemento
+    const form = useRef(null);
+    ...
+    <form action="/" className="form" ref={form}>
+  3. Creamos el handleSubmit que utilizara el formData
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = new FormData(form.current);
+        const  data = {
+            username: formData.get('email'), 
+            password: formData.get('password')
+        }
+        console.log(data);
+    }
+  4. Agregamos el onclick al boton
+    <button onClick={handleSubmit} </button>
+
+https://developer.mozilla.org/en-US/docs/Web/API/FormData
+*************************************************** CLASE 21
+CLASE 22 useContext ******************************************
+  Podemos acceder a la informacion desde cualquier parte de la aplicacion
+  1. Crear una carpeta que se llame context y crear un archivo AppContext.js
+  2. Conectar el context en App.jsx
+    import AppContext from '@context/AppContext';
+  3. Trabajar con el provider an App.jsx, encapsula la informacion para poder compartirla
+    import useInitialState from '@hooks/useInitialState';
+    <AppContext.Provider value={initialState}>
+    ...
+    const initialState = useInitialState(); 
+  4. Crear customHook para contener el estado useInitialState.jsx
+    const useInitialState = () =>{  //Funcion para inicializar el estado
+    const [state, setState] = useState(initialState);
+    const addToCart = (payload) =>{
+        setState({
+                ...state, 
+                cart:[...state.cart, payload]
+        });
+    };
+    return {
+        state,
+        addToCart
+    }
+  }
+  export default useInitialState;
+  5. En ProductItem.jsx agregamos la funcionalidad
+    import React, {useState,useContext } from 'react';
+    import AppContext from '@context/AppContext';
+    const {addToCart} = useContext(AppContext);
+    const handleClick = item =>{
+      addToCart(item);
+    }
+  6. Agregar la funcionalidad
+    <figure onClick={() => handleClick(product)}>
+*************************************************** CLASE 22
+CLASE 23 Transmitir la informacion al componente. **********
+  1. En Header.jsx traemos nuestros elementos
+    import React, { useState, useContext, useEffect } from 'react';
+    import AppContext from '@context/AppContext';
+  2. Traemos el estado.
+    const { state } = useContext(AppContext);
+  3. Hacemos la validacion 
+    {state.cart.length> 0 ? <div>{state.cart.length}
+*************************************************** CLASE 23
+CLASE 24 Orden de compra ***************************
+  1. En Header.jsx agregamos nuestro toggle con useState
+    const [toggleOrders, setToggleOrders] = useState(false);
+  2. Importar el componente myOrder
+    import MyOrder from '@containers/MyOrder';
+  3. Agregamos el componente
+    {toggleOrders ? <MyOrder/> : ""}
+  4. Agregamos la logica en el onClick (tiene que ser una funcion anonima(),
+     si no lo hacemos se ejecuta multiples veces)
+    onClick={() => setToggleOrders(!toggleOrders)}>
+  5. Agregamos los elemenots a myOrder.jsx, agregamos el contexto 
+    import React, { useContext } from 'react';
+    import AppContext from '../context/AppContext';
+  6. Mapeamos los productos
+    const { state } = useContext(AppContext); ...
+    {state.cart.map(product => (<OrderItem product={product} key={`orderItem-${product.id}`} />))}
+*************************************************** CLASE 24
+
+
+
+
+
+clase 25  hacer la suma de orderItem, en orderItem.jsx
+
+const sumTotal = () =>{  //se puede convertir en un hook si se quiere usar mas veces
+    const reducer = (accumulator, currentValue) => accumulator + currentValue.price;
+    const sum = state.cart.reduce(reducer,0);
+    return sum;
+}
+
+clase 26 Eliminando items del carrito  orderItem.jsx
+  const { removeFromCart } = useContext(AppContext);
+    const handleRemove = product => {
+      removeFromCart(product);
+    }
+
+/*https://www.iloveimg.com/resize-image#resize-options,pixels*/ resize images
+
+
+Dart
+Debuuger for java
+Code Runner
+Auto Rename Tag
+Color Highlight
+EditorConfig for VS Code
+IntelliCode
+Live server
+Path Intellisene
+Prettier
+React developer tools
