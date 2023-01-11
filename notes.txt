@@ -1,3 +1,6 @@
+teclado liverpool 
+
+0007198166PD
 git reset --hard HEAD
 git pull
 
@@ -55,6 +58,39 @@ En webpack config agregamos las siguientes configuraciones:
  -En rules: test: /\.(css|scss)$/i,
  -Declaramos la constante del plugin const MiniCSSExtractPlugin 
 
+Clase 8 Transformando HTML **********************************
+  -Descargamos el codigo de la clase de frontend developer
+  -creamos el archivo de Login.jsx
+
+Clase 9 Estilos *********************************************
+  -Pasar los estilos a los archivos scss
+  -importar las 
+  - En esta clase solo pasamos los componentes de la clase 1
+  -Creamos el Layout con el children y lo mandamos a llamar en App.
+
+Clase 10 React Router ***************************************
+npm install react-router-dom
+-Cambiamos App.jsx a routes y configuramos las rutas
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route exact path="/login" element={<Login />} />	
+                    <Route exact path="/recovery-password" element={<RecoveryPassword />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Layout>
+        </BrowserRouter>
+-Creamos el archivo de RecoveryPassword
+Clase 11 Navegacion entre rutas ****************************
+- Agregamos Home y Notfound.jsx
+- Agregams las siguientes configuraciones al webconfig 
+  publicPath
+  historyApiFallback
+Clase 12 Header en las Rutas *******************************
+ -Agregar Header.jsx a partir de la clase 11 de frontend 
+ -Lo agregamos al home
+Clase 13 Atomic Design **************************************
+CLase 14
 CLASE 17 UseState *******************************************
 En productItem.js y asi podemos usar cart donde queramos Recordemos que los estados son maneras 
 en la que un componente puede administrar información cambiante en el entorno, y después de ser 
