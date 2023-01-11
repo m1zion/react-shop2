@@ -23,7 +23,7 @@ productItem.jsx
     const {addToCart} = useContext(AppContext); //Llamamos el estado
 
 
-CLASE 3 Inicializar el repositario *******************************************
+CLASE 3 Inicializar el repositario **************************
 npm init
   nombre: reactshop
   entry point: src/index.js
@@ -36,7 +36,7 @@ Creamos el archivo
 src/index.js
 src/components/App.jsx
 
-CLASE 4 BABBEL y WEBPACK ****************************************************
+CLASE 4 BABBEL y WEBPACK ************************************
 BABEL: Javascript y react
 WEBPACK (curso de webpack)
 npm install @babel/core @babel/preset-env @babel/preset-react
@@ -81,16 +81,24 @@ npm install react-router-dom
             </Layout>
         </BrowserRouter>
 -Creamos el archivo de RecoveryPassword
-Clase 11 Navegacion entre rutas ****************************
+Clase 11 Navegacion entre rutas *****************************
 - Agregamos Home y Notfound.jsx
 - Agregams las siguientes configuraciones al webconfig 
   publicPath
   historyApiFallback
-Clase 12 Header en las Rutas *******************************
+Clase 12 Header en las Rutas ********************************
  -Agregar Header.jsx a partir de la clase 11 de frontend 
  -Lo agregamos al home
 Clase 13 Atomic Design **************************************
-CLase 14
+CLase 14 Reto ***********************************************
+Clase 15 Tipos de componentes: stateful vs. stateless  ******
+Ver clase para entender la diferencia
+Clase 16 Imagenes y Alias ***********************************
+ -Pasar las carpetas de imagenes a assets
+ -En webpack.config agregar:
+   test: /\.(png|svg|jpg|gif)$/,
+   type: 'asset'
+ - Agregamos los alias en el webpack
 CLASE 17 UseState *******************************************
 En productItem.js y asi podemos usar cart donde queramos Recordemos que los estados son maneras 
 en la que un componente puede administrar información cambiante en el entorno, y después de ser 
@@ -106,9 +114,8 @@ llamado se renderiza el React DOM de nuevo
     <p onClick={() => handleClickEffect(product)}>${product.price}</p>
   4. Ahora ponemos usar la variable en cualquier parte
     {cart}
-*************************************************** CLASE 17
 
-CLASE 18 Toggle Menu (useState)*******************************************
+CLASE 18 Toggle Menu (useState)******************************
   1. Importamos en useState en Header.jsx
     import React, {useState} from 'react';
   2. Pasamos un valor y una funcion modificadora 
