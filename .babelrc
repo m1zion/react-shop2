@@ -3,5 +3,8 @@
     "presets":[
         "@babel/preset-env",  //Compila JS 
         "@babel/preset-react"  //Compila React
+    ],
+    "plugins":[
+        "@babel/plugin-transform-runtime"
     ]
 }

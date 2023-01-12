@@ -134,10 +134,12 @@ CLASE 18 Toggle Menu (useState)******************************
 CLASE 19 useEffect y consumo de APIs *************************
   useState solo cambia el estado de los elementos
   Use Effect ayuda a hacer peticiones y renderisar los elementos de la API
+  Use Effect recibe dos parametros (funcion anonima, elemento a escuchar)
   1. En productlist.jsx creamos nuestra constante 
     const API = 'https://apidev.solucionesparatuauto.mx/api/v1/products/?offset=1&limit=10';
-  1.1. Instalamos babel plugin transform runtime
-  2. Importamos axios, useEffect y useState, y lo agregamos a .babelerc
+  1.1. Instalamos @babel/plugin-transform- y lo agregam a.babelrc
+  1.2 Instalamos axios npm install axios
+  2. Importamos axios, useEffect y useState, y lo agregamos 
     import { useEffect,useState} from 'react';
     import axios from'axios';
   3. Llamamos la informacion dentro de productList con useState, 
