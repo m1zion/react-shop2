@@ -195,10 +195,13 @@ CLASE 21 useRef y formularios *******************************
             password: formData.get('password')
         }
         console.log(data);
-    }
+    } 
+    // Hay que cambia el id por name en los imputs
   4. Agregamos el onclick al boton
     <button onClick={handleSubmit} </button>
-
+  5. Para que no envie por get agregamos el preventDefault
+        const handleSubmit = (event) =>{
+        event.preventDefault();
 https://developer.mozilla.org/en-US/docs/Web/API/FormData
 *************************************************** CLASE 21
 CLASE 22 useContext ******************************************
